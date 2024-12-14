@@ -39,11 +39,23 @@ func addRoutes(
 		"/livez",
 		handlers.LivezHandler(),
 	)
+	apiGroup.GET(
+		"/readyz",
+		handlers.ReadyzHandler(sqlClient),
+	)
 
 	apiCharacters := apiGroup.Group("/characters")
 	apiCharacters.POST(
 		"/",
 		handlers.GetCharactersHandler(characterRepository),
+	)
+	apiCharacters.GET(
+		"/search",
+		handlers.SearchCharactersHandler(characterRepository),
+	)
+	apiCharacters.DELETE(
+		"/delete/:name",
+		handlers.DeleteCharacterHandler(characterRepository),
 	)
 
 	return app, nil
