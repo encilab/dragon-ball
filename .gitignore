@@ -1,0 +1,23 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+*.out
+*coverage.html
+*.log
+*.cpu.prof
+*.mem.prof
+go.work
+.vscode/
+
+*.dtmp
+*.bkp
+*cert.pem
+*cert.key
+
+# Dependency directories (remove the comment below to include it)
+vendor/
+logs/

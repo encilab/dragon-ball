@@ -1,0 +1,21 @@
+FROM golang:1.22-alpine AS build
+
+RUN apk update
+RUN apk --no-cache add git
+
+WORKDIR /go/src/web
+COPY . .
+RUN CGO_ENABLED=0 go build -o /go/bin/web ./cmd/web/main.go
+
+FROM alpine:latest
+COPY --from=build /go/bin/web /go/bin/web
+COPY --from=build /go/src/web/conf/ /conf/
+
+RUN adduser -D web
+RUN mkdir -p ./conf/logs \
+    && chown web:web ./conf/logs \
+    && chown -R web:web /conf
+USER web
+ENV GOMODCACHE=/conf
+
+ENTRYPOINT ["/go/bin/web"]

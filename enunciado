@@ -1,0 +1,96 @@
+
+**RETO TÉCNICO - DragonBall**
+
+**Objetivo:**  
+
+Construir un servicio en **Go** que permita crear y almacenar información de personajes de DragonBall obtenidos de una API externa. Además, se requiere que el candidato diagrame la solución implementada.  
+ 
+**Requisitos técnicos:**  
+
+1. **Lenguaje:**  
+
+   - El servicio debe ser implementado exclusivamente en **Go**.
+ 
+2. **Base de datos:**  
+
+   - El candidato puede elegir el motor de base de datos que prefiera (relacional o no relacional).  
+
+   - Los datos deben ser persistidos en la base de datos elegida.
+ 
+3. **Funcionalidades requeridas:**  
+
+   - Crear un servicio local que cumpla con los siguientes requerimientos:  
+
+    1. Implementar un endpoint `POST /characters` que reciba un JSON con el siguiente formato:  
+
+        ```json
+
+        {
+
+          "name": "Goku"
+
+        }
+
+        ```  
+
+        - Este endpoint debe:  
+
+        - Buscar el personaje en la API externa: [DragonBall API](https://web.dragonball-api.com/).  
+
+        - Obtener el ID y otros tres campos del personaje (incluido el nombre).  
+
+        - Determinar el campo que contiene el nombre del personaje, ya que podría llegar en `name` o en `character`.  
+
+        - Guardar en la base de datos el ID, el nombre y otro dato básico elegido por el candidato, además de los tres campos adicionales obtenidos de la API.  
+ 
+4. **Manejo de errores:**  
+
+    - El servicio debe manejar adecuadamente errores comunes, como:  
+
+    - Problemas de conexión con la API externa.  
+
+    - Respuestas inesperadas o datos faltantes en la API externa.  
+
+    - Fallas al conectarse o escribir en la base de datos.
+ 
+5. **Entrega:**  
+
+    - El proyecto debe estar contenido en un repositorio público, incluyendo:  
+
+    - Un archivo `docker-compose.yml` para compilar y desplegar la aplicación sin intervención adicional.  
+
+    - Un archivo `README.md` que incluya:  
+
+    - Las instrucciones para ejecutar el proyecto.  
+
+    - El formato del endpoint con un ejemplo para probar la aplicación.  
+
+6. **Diagrama:**  
+
+    - Crear un diagrama que ilustre la solución implementada.  
+
+    - Se prefiere un **diagrama de secuencia**, pero un **diagrama de flujo** también es aceptable.  
+
+    - No es necesario usar una herramienta específica.  
+
+**Criterios de evaluación:**  
+
+1. Diseño de la solución.  
+
+2. Calidad del código (estructura, legibilidad, y uso idiomático de Go).  
+
+3. Manejo de errores.  
+
+4. Uso correcto de Docker para la implementación.  
+
+**Notas adicionales:**  
+
+- La API de DragonBall es obligatoria.  
+
+- No se requiere implementar migraciones para la base de datos.  
+
+- Documentación y pruebas son opcionales, pero su inclusión será valorada.  
+
+---
+
+evers.rivero@amaris.com

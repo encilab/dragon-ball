@@ -1,0 +1,127 @@
+{
+	"info": {
+		"_postman_id": "8d4d4aed-aa1d-45df-83c6-bf4d4d2e0570",
+		"name": "dragon-ball",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10807976"
+	},
+	"item": [
+		{
+			"name": "character",
+			"item": [
+				{
+					"name": "search-character",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"test\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/characters",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"characters"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/characters/search?createdCursor=2024-04-30T21:32:06.483926Z&limit=100",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"characters",
+								"search"
+							],
+							"query": [
+								{
+									"key": "createdCursor",
+									"value": "2024-04-30T21:32:06.483926Z"
+								},
+								{
+									"key": "limit",
+									"value": "100"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/characters/delete/goku",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"characters",
+								"delete",
+								"goku"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "livez",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/livez",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"livez"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "readyz",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/readyz",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"readyz"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
