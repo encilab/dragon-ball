@@ -13,12 +13,12 @@ func GetCharactersHandler(characterRepository domains.CharacterRepository) gin.H
 	return func(ctx *gin.Context) {
 		req := make(map[string]string)
 		if err := ctx.BindJSON(&req); err != nil {
-			ctx.JSON(http.StatusBadRequest, gin.H{"error": domains.ErrNameIsRequired})
+			ctx.JSON(http.StatusBadRequest, gin.H{"error": domains.ErrNameIsRequired.Error()})
 			return
 		}
 
 		if req["name"] == "" {
-			ctx.JSON(http.StatusBadRequest, gin.H{"error": domains.ErrNameIsRequired})
+			ctx.JSON(http.StatusBadRequest, gin.H{"error": domains.ErrNameIsRequired.Error()})
 			return
 		}
 
@@ -33,7 +33,7 @@ func GetCharactersHandler(characterRepository domains.CharacterRepository) gin.H
 		if err != nil {
 			switch {
 			case err == domains.ErrCharacterNotFoundInExternalAPI:
-				ctx.JSON(http.StatusNotFound, gin.H{"error": err})
+				ctx.JSON(http.StatusNotFound, gin.H{"error": err.Error()})
 				return
 
 			default:
@@ -83,7 +83,7 @@ func DeleteCharacterHandler(characterRepository domains.CharacterRepository) gin
 		if err != nil {
 			switch {
 			case err == domains.ErrCharacterNotDeleted:
-				ctx.JSON(http.StatusInternalServerError, gin.H{"error": err})
+				ctx.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 				return
 			default:
 				log.Println(err)

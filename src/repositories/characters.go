@@ -4,7 +4,6 @@ import (
 	"context"
 	"database/sql"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"log"
 	"net/http"
@@ -60,9 +59,10 @@ func (r *CharacterRepository) GetCharacterInExternalAPIByName(
 	}
 
 	if len(characters) == 0 {
-		return domains.Character{}, errors.New("character not found")
+		return domains.Character{}, domains.ErrCharacterNotFoundInExternalAPI
 	}
 
+	characters[0].Name = strings.ToLower(characters[0].Name)
 	err = r.setCharacterInDatabase(ctx, characters[0].ID, characters[0].Name, characters[0].Ki, characters[0].Race, characters[0].Image)
 	if err != nil {
 		return domains.Character{}, err

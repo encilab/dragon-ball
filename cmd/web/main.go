@@ -53,7 +53,7 @@ func addRoutes(
 		"/search",
 		handlers.SearchCharactersHandler(characterRepository),
 	)
-	apiCharacters.GET(
+	apiCharacters.DELETE(
 		"/delete/:name",
 		handlers.DeleteCharacterHandler(characterRepository),
 	)
