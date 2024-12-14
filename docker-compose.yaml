@@ -35,8 +35,8 @@ services:
     - "5432:5432"
     volumes:
     - "psql-data:/var/lib/postgresql/data"
-    - "./conf/tools/master.conf:/etc/postgresql/postgresql.conf"
-    - "./conf/tools/master-pg_hba.conf:/etc/postgresql/pg_hba.conf"
+    - "./conf/master.conf:/etc/postgresql/postgresql.conf"
+    - "./conf/master-pg_hba.conf:/etc/postgresql/pg_hba.conf"
     - "./conf/init.sql:/docker-entrypoint-initdb.d/init.sql:ro"
     networks:
       internal:

@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/encilab/dragon-ball/src/domains"
@@ -20,10 +21,25 @@ func GetCharactersHandler(characterRepository domains.CharacterRepository) gin.H
 			return
 		}
 
-		character, err := characterRepository.GetCharacterInExternalAPIByName(ctx, req["name"])
-		if err != nil {
-			ctx.JSON(http.StatusNotFound, gin.H{"error": "character not found in external API"})
+		character, err := characterRepository.GetCharacterInDatabaseByName(ctx, req["name"])
+		if err == nil {
+			ctx.JSON(http.StatusOK, character)
 			return
+		}
+		log.Println("error getting character in local database")
+
+		character, err = characterRepository.GetCharacterInExternalAPIByName(ctx, req["name"])
+		if err != nil {
+			switch {
+			case err == domains.ErrCharacterNotFoundInExternalAPI:
+				ctx.JSON(http.StatusNotFound, gin.H{"error": err})
+				return
+
+			default:
+				log.Println(err)
+				ctx.Status(http.StatusInternalServerError)
+				return
+			}
 		}
 
 		ctx.JSON(http.StatusOK, character)

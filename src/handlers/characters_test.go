@@ -18,14 +18,15 @@ import (
 func Test_GetCharactersHandler(t *testing.T) {
 	name := "goku"
 	characterDomain := domains.Character{
-		ID:       1,
-		Name:     "Goku",
-		Ki:       60000000,
-		Race:     "Saiyan",
-		UrlImage: "https://dragonball-api.com/characters/goku_normal.webp",
+		ID:    1,
+		Name:  "Goku",
+		Ki:    "60.000.000",
+		Race:  "Saiyan",
+		Image: "https://dragonball-api.com/characters/goku_normal.webp",
 	}
 
 	characterRepoMock := mocks.NewCharacterRepository(t)
+	characterRepoMock.On("GetCharacterInDatabaseByName", mock.Anything, name).Return(characterDomain, domains.ErrCharacterNotFoundInDatabase)
 	characterRepoMock.On("GetCharacterInExternalAPIByName", mock.Anything, name).Return(characterDomain, nil)
 
 	gin.SetMode(gin.TestMode)
