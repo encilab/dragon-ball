@@ -39,6 +39,10 @@ func addRoutes(
 		"/livez",
 		handlers.LivezHandler(),
 	)
+	apiGroup.GET(
+		"/readyz",
+		handlers.ReadyzHandler(sqlClient),
+	)
 
 	apiCharacters := apiGroup.Group("/characters")
 	apiCharacters.POST(
